@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css">
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+  <script src="./scripts/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+  <script src="./scripts/app.js" defer></script>
+  <title>Flashcarder 2</title>
+</head>
+<body>
+  <div id="app">
+    <div class="supreme-container">
+      <header>
+        <h1>Flashcarder 2</h1>
+      </header>
+      <div v-show="homeShow" class="main-container">
+        <div class="import-container">
+          <div class="landing-card-title"><strong>Import a deck to play (.json):</strong></div>
+          <input type="file" name="file-select" id="file-select" @change="importDeck" accept=".json">
+        </div>
+        <div class="new-deck-container">
+          <div class="landing-card-title"><strong>Create new deck:</strong></div>
+          <form @submit.prevent = "makeFlashcard" id="flashcard-form">
+            <div class="form-line">
+              <label for="title">Deck Title:</label>
+              <input type="text" name="title" id="new-deck-title" autofocus required>
+            </div>
+            <div class="form-line">
+              <label for="front">Front (Clue):</label>
+              <input type="text" name="front" id="new-card-front" required>
+            </div>
+            <div class="form-line">
+              <label for="back">Back (Answer):</label>
+              <input type="text" name="back" id="new-card-back" required>
+            </div>
+            <button type="submit" id="go">Enter</button>
+            <button type="button" id="export-json" v-show="createShow" @click="exportDeck">Export deck (.json)</button>
+          </form>
+        </div>
+        <div class="add-container">
+          <div class="landing-card-title"><strong>Add to an existing deck:</strong></div>
+          <input type="file" name="add-deck-select" id="add-deck-select" @change="addToDeck" accept=".json">
+          <form target="frame" id="add-card-form" style="display: none;">
+            <div class="form-line">
+              <label for="title-added">Set Title:</label>
+              <input type="text" name="title-added" id="title-added" required>
+            </div>
+            <div class="form-line">
+              <label for="add-front">Front (Clue):</label>
+              <input type="text" name="add-front" id="add-front" required>
+            </div>
+            <div class="form-line">
+              <label for="add-back">Back (Answer):</label>
+              <input type="text" name="add-back" id="add-back" required>
+            </div>
+            <div class="form-line">
+              <button id="add-go">Enter</button>
+            </div>
+          </form>
+          <button id="export-added-json" style="display: none; margin-bottom: 2vh">Export deck as JSON</button>
+        </div>
+      </div>
+
+      <div v-show="playShow" class="play-container">
+        <div class="flashcard">
+          <div v-show="!cardFlipped" id="flashcard-front" class="flashcard-text"></div>
+          <div v-show="cardFlipped" id="flashcard-back" class="flashcard-text"></div>
+          <div v-show="!cardFlipped" class="card-count">{{ cardCount + 1 }} of {{ deckLength }}</div>
+        </div>
+        <button id="play-back" @click="backFromPlay" class="back-button">&#8678; Back</button>
+      </div>
+      <div v-show="createShow" class="create-container"></div>
+      <div v-show="addShow" class="add-container"></div>
+
+      <div v-show="homeShow" class="created-cards-container"></div>
+      <!-- <footer>
+        <span style="font-size: 0.85em;">Check out the Github!</span>
+      </footer> -->
+    </div>
+    <iframe src="" style="display: none" name="frame"></iframe>
+  </div>
+</body>
+</html>

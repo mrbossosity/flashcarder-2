@@ -1,0 +1,152 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  font-family: "Noto Sans JP"
+}
+
+:root {
+  --purple-shadow: rgb(95, 0, 132);
+  --deep-gray: rgb(20, 20, 20);
+  --pink-hover-shadow: 0 2px 5px 1.5px deeppink;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, var(--deep-gray) 20%, rgb(48, 41, 48) 35%, rgb(66, 52, 66) 45%, rgb(125, 60, 124) 65%, deeppink 90%);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  font-family: "Noto Sans SC", Arial, Helvetica, sans-serif;
+}
+
+header {
+  padding: 15px 15px;
+  border-bottom: 2px solid darkgray;
+  box-shadow: 0 3px 8px var(--purple-shadow);
+  background-color: white;
+}
+
+header > h1 {
+  margin: 0;
+}
+
+input {
+  min-width: 0;
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+  transition: 0.2s
+}
+
+button:hover {
+  box-shadow: var(--pink-hover-shadow);
+}
+
+.supreme-container {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.main-container {
+  height: auto;
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 15px;
+}
+
+.main-container > div {
+  min-height: 0;
+  padding: 20px 15px;
+  background-color: white;
+  border: 3px solid darkgray;
+  border-radius: 8px;
+  box-shadow: 0 4px 5px 2px var(--purple-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.2s
+}
+
+.main-container > div:hover {
+  box-shadow: var(--pink-hover-shadow);
+}
+
+.landing-card-title {
+  margin-bottom: 0.6em
+}
+
+.form-line {
+  margin: 1em 0;
+  margin-top: 0.25em;
+  display: flex
+}
+
+.form-line > label {
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
+.play-container {
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+.flashcard {
+  min-width: 40vw; min-height: calc(40vw * 2 / 3);
+  padding: 20px 15px;
+  background-color: white;
+  border: 3px solid darkgray;
+  border-radius: 8px;
+  box-shadow: 0 4px 5px var(--purple-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.flashcard:hover {
+  box-shadow: var(--pink-hover-shadow);
+}
+
+.flashcard-text {
+  font-size: 3em;
+}
+
+.back-button {
+  position: absolute;
+  bottom: 15px; left: 16px;
+  font-size: 1.25em;
+  background-color: white;
+  padding: 2.5px 5px;
+  border: 1.5px solid darkgray;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px var(--purple-shadow);
+}
+
+.created-cards-container {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+  overflow-x: scroll;
+}
+
+.created-card {
+  min-width: 10vw; min-height: 0;
+  width: 10vw; height: calc(10vw * 2 / 3);
+  font-size: 0.8em;
+  line-height: calc((10vw * 2 / 3) - 45px);
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
