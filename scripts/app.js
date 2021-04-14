@@ -69,18 +69,20 @@ const app = new Vue({
 
     makeFlashcard() {
       if (!this.createShow) this.createShow = true;
-      let front = $("#new-card-front").val();
-      let back = $("#new-card-back").val();
-      let card = new Flashcard(front, back);
+      let front = $("#new-card-front").val()
+      let back = $("#new-card-back").val()
+      let card = new Flashcard(front, back)
       this.newDeck.push(card)
       let html = `<div class="flashcard created-card">${front} / ${back}</div>`
       $(".created-cards-container").append(html)
       $(".created-cards-container").scrollLeft(9000)
+      $("#new-card-back").val("")
+      $("#new-card-front").val("").focus()
     },
 
     exportDeck() {
-      let title = $("#new-deck-title").val(), name = `${title}.json`;
-      let blob = new Blob([JSON.stringify(this.newDeck)], { type : 'application/json' });
+      let title = $("#new-deck-title").val(), name = `${title}.json`
+      let blob = new Blob([JSON.stringify(this.newDeck)], { type : 'application/json' })
       saveAs(blob, name)
     },
 
