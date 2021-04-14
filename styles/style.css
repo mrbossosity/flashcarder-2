@@ -99,7 +99,7 @@ button:hover {
 
 .flashcard {
   min-width: 40vw; min-height: calc(40vw * 2 / 3);
-  padding: 20px 15px;
+  padding: 20px 1.75ch;
   background-color: white;
   border: 3px solid darkgray;
   border-radius: 8px;
