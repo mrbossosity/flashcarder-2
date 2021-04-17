@@ -68,7 +68,10 @@ const app = new Vue({
     },
 
     makeFlashcard() {
-      if (!this.createShow) this.createShow = true;
+      if (!this.createShow) {
+        this.createShow = true
+        this.newDeck = []
+      }
       let front = $("#new-card-front").val()
       let back = $("#new-card-back").val()
       let card = new Flashcard(front, back)
@@ -87,15 +90,22 @@ const app = new Vue({
     },
 
     addToDeck(e) {
+      this.createShow = true
       var jsonFile = e.target.files[0]
       var reader = new FileReader()
       reader.onload = (e) => {
         let contents = e.target.result
         let deck = JSON.parse(contents)
+        this.newDeck = deck
+        printDeck(deck)
+        let input = document.querySelector("#add-deck-select")
+        let fileName = input.files.item(0).name.replace(".json", "")
+        $("#new-deck-title").val(fileName)
+        $("#new-card-back, #add-deck-select").val("")
+        $("#new-card-front").val("").focus()
       }
       
       reader.readAsText(jsonFile)
-      $("#add-deck-select").val("")
     }
 
   }
@@ -114,4 +124,13 @@ function shuffle(array) {
     array[j] = temp
   }
   return array
+}
+
+function printDeck(deck) {
+  $(".created-cards-container").children().remove()
+  deck.forEach(card => {
+    let html = `<div class="flashcard created-card">${card.front} / ${card.back}</div>`
+    $(".created-cards-container").append(html)
+    $(".created-cards-container").scrollLeft(9000)
+  })
 }

@@ -139,6 +139,10 @@ button:hover {
   overflow-x: scroll;
 }
 
+.created-cards-container:last-child {
+  margin-right: 15px
+}
+
 .created-card {
   min-width: 10vw; min-height: 0;
   width: 10vw; height: calc(10vw * 2 / 3);
